@@ -389,4 +389,394 @@
       color: #F9F6F0;
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 0.35rem
+      padding: 0.35rem 0.75rem;
+      border-radius: 30px;
+      letter-spacing: 0.8px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .trend-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      background: linear-gradient(135deg, #B8860B, #8C4A32);
+      color: #FFFFFF;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.35rem 0.75rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Card Content Area */
+    .card-content {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      background: var(--card-bg);
+      z-index: 2;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .category-tag {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .share-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .share-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-secondary);
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1.2rem;
+      line-height: 1.22;
+      transition: color 0.2s;
+    }
+
+    /* Animated Shimmer CTA Button */
+    .shop-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      text-decoration: none;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      overflow: hidden;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .shop-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent
+      );
+      transition: all 0.6s ease;
+    }
+
+    .card:hover .shop-btn::before {
+      left: 130%;
+    }
+
+    .shop-btn .arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover .shop-btn .arrow {
+      transform: translateX(5px);
+    }
+
+    /* Empty Search State */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem 5rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      background: var(--bg-secondary);
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Keyframe Animations */
+    @keyframes cardCascade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .controls-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-wrap {
+        max-width: 100%;
+      }
+      .filter-group {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+      }
+      .filter-btn {
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Moving Luxury Background -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Infinite Scrolling Runway Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>TREND THEORY OFFICIAL EDIT</span><span class="dot">✦</span>
+      <span>CURATED DAILY PINTEREST FINDS</span><span class="dot">✦</span>
+      <span>FESTIVE & ROYAL ETHNIC WEAR</span><span class="dot">✦</span>
+      <span>AESTHETIC COLLEGE & STREET STYLE</span><span class="dot">✦</span>
+      <span>VERIFIED DIRECT SHOPPING LINKS</span><span class="dot">✦</span>
+      <span>TREND THEORY OFFICIAL EDIT</span><span class="dot">✦</span>
+      <span>CURATED DAILY PINTEREST FINDS</span><span class="dot">✦</span>
+      <span>FESTIVE & ROYAL ETHNIC WEAR</span><span class="dot">✦</span>
+      <span>AESTHETIC COLLEGE & STREET STYLE</span><span class="dot">✦</span>
+      <span>VERIFIED DIRECT SHOPPING LINKS</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- Editorial Header -->
+  <header>
+    <span class="eyebrow">Curated Style Directory</span>
+    <h1 class="brand-title">TREND THEORY</h1>
+    <p class="brand-subtitle">Tap any curated look below or enter the Pin # from Pinterest to shop the exact piece.</p>
+  </header>
+
+  <!-- Sticky Search & Category Filter Bar -->
+  <section class="sticky-controls">
+    <div class="controls-inner">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-box" placeholder="Search Pin # (e.g. #01) or keyword...">
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active" onclick="filterCategory('All', this)">All Edits</button>
+        <button class="filter-btn" onclick="filterCategory('Festive Wear', this)">Festive Wear</button>
+        <button class="filter-btn" onclick="filterCategory('College & Daily', this)">College & Daily</button>
+        <button class="filter-btn" onclick="filterCategory('Jewelry & Bags', this)">Jewelry & Bags</button>
+        <button class="filter-btn" onclick="filterCategory('Luxe & Gadgets', this)">Luxe & Gadgets</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Counter -->
+  <div class="results-bar">
+    <span id="resultsCount">Showing Curated Looks</span>
+    <span>Updated Daily ✨</span>
+  </div>
+
+  <!-- Dynamic Product Grid -->
+  <main class="grid" id="productGrid"></main>
+
+  <!-- Floating Day/Night Luxury Mode Toggle -->
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">
+    <span id="themeIcon">🌙</span> <span id="themeText">Noir Mode</span>
+  </button>
+
+  <footer>
+    <div class="footer-brand">TREND THEORY</div>
+    <p>Curated Fashion, Aesthetic Essentials & Seasonal Edits.</p>
+    <p style="margin-top: 0.6rem; opacity: 0.75;">Disclosure: As an Amazon Associate and affiliate partner, we earn from qualifying purchases via links on this page.</p>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // DAILY PIN LIST: ADD YOUR 2 NEW PINS AT THE TOP OF THIS LIST EVERY DAY!
+    // =========================================================================
+    const dailyPins = [
+      {
+        pinNumber: "#04",
+        title: "Crimson Velvet & Zari Embroidered Festive Anarkali Set",
+        category: "Festive Wear",
+        badge: "Trending 🔥",
+        image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      },
+      {
+        pinNumber: "#03",
+        title: "Oversized Linen Shirt & Wide-Leg Campus Denim Edit",
+        category: "College & Daily",
+        badge: "Campus Hit ✨",
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      },
+      {
+        pinNumber: "#02",
+        title: "Antique Gold Temple Jhumka & Layered Choker Set",
+        category: "Jewelry & Bags",
+        badge: "Under ₹499",
+        image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      },
+      {
+        pinNumber: "#01",
+        title: "Royal Tissue Gold Draped Saree with Designer Blouse",
+        category: "Festive Wear",
+        badge: "Bestseller ⭐",
+        image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      }
+    ];
+    // =========================================================================
+
+    const grid = document.getElementById('productGrid');
+    const searchInput = document.getElementById('searchInput');
+    const resultsCount = document.getElementById('resultsCount');
+    let currentCategory = 'All';
+
+    function renderProducts() {
+      const query = searchInput.value.toLowerCase().trim();
+      grid.innerHTML = '';
+
+      const filtered = dailyPins.filter(item => {
+        const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
+        const matchesSearch =
+          item.title.toLowerCase().includes(query) ||
+          item.pinNumber.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      resultsCount.textContent = `Showing ${filtered.length} Curated ${filtered.length === 1 ? 'Look' : 'Looks'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>No matching looks found</h3>
+            <p style="margin-top:0.4rem;">Try searching a different Pin # (like #01) or click "All Edits".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((item, index) => {
+        const cleanId = item.pinNumber.replace('#', 'pin-');
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.id = cleanId;
+        // Dynamic staggered cascade animation delay
+        card.style.animationDelay = `${index * 0.08}s`;
+
+        const badgeHTML = item.badge
+          ? `<span class="trend-badge">${item.badge}</span>`
+          : '';
+
+        card.innerHTML = `
+          <div class="img-container">
+            <span class="pin-badge">${item.pinNumber}</span>
+            ${badgeHTML}
+            <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="meta-row">
+                <span class="category-tag">${item.category}</span>
+                <button class="share-btn" onclick="copyPinLink('${cleanId}', '${item.pinNumber}', this)" title="Copy direct link to this outfit">
+                  🔗 Share
+                </button>
+              </div>
+              <h2 class="product-title">${item.title}</h2>
+            </div>
+            <a href="${item.affiliateLink}" target="_blank" rel="noopener sponsored" class="shop-btn">
+              <span>Shop This Look</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(category, btnElement) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderProducts();
+    }
+
+    function copyPinLink(elementId, pinNum, btn) {
+      const url = `${window.location.origin}${window.location.pathname}#${elementId}`;
+      navigator.clipboard.writeText(url);
+      const original = btn.innerHTML;
+      btn.innerHTML = '✓ Copied!';
+      setTimeout(() => { btn.innerHTML = original; }, 1800);
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      document.getElementById('themeIcon').textContent = next === 'dark' ? '☀️' : '🌙';
+      document.getElementById('themeText').textContent = next === 'dark' ? 'Ivory Mode' : 'Noir Mode';
+    }
+
+    searchInput.addEventListener('input', renderProducts);
+    renderProducts();
+  </script>
+</body>
+</html>
