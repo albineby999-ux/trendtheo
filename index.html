@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Olive Edit | Curated Fashion & Daily Finds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream-bg: #FAF7F2;        /* Rich Light Cream */
+      --cream-card: #FFFFFF;      /* Pure Crisp Card Surface */
+      --cream-border: #E6E0D4;    /* Warm Sand Border */
+      --olive-dark: #2C3828;      /* Deep Luxury Olive */
+      --olive-main: #43533B;      /* Primary Olive Green */
+      --olive-soft: #E9EFE6;      /* Soft Sage Pill Highlight */
+      --olive-muted: #6E7D66;     /* Muted Olive Subtext */
+      --gold-accent: #9E7E53;     /* Warm Antique Gold */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream-bg);
+      color: var(--olive-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      padding-bottom: 4rem;
+    }
+
+    /* Top Announcement Banner */
+    .top-bar {
+      background-color: var(--olive-dark);
+      color: var(--cream-bg);
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.6rem 1rem;
+    }
+
+    /* Editorial Header */
+    header {
+      text-align: center;
+      padding: 3rem 1.25rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--olive-dark);
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-size: 0.9rem;
+      color: var(--olive-muted);
+      margin-top: 0.6rem;
+      font-weight: 400;
+    }
+
+    /* Search & Filter Controls */
+    .controls {
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 420px;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid var(--cream-border);
+      border-radius: 50px;
+      background-color: var(--cream-card);
+      color: var(--olive-dark);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--olive-main);
+      box-shadow: 0 0 0 3px rgba(67, 83, 59, 0.12);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--cream-border);
+      color: var(--olive-muted);
+      padding: 0.45rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--olive-main);
+      color: var(--cream-bg);
+      border-color: var(--olive-main);
+    }
+
+    /* Product Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.75rem;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .card {
+      background: var(--cream-card);
+      border: 1px solid var(--cream-border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(44, 56, 40, 0.08);
+    }
+
+    .pin-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: rgba(44, 56, 40, 0.88);
+      color: var(--cream-bg);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      background-color: #f0ece1;
+    }
+
+    .card-content {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .category-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gold-accent);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--olive-dark);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .shop-btn {
+      display: block;
+      width: 100%;
+      background-color: var(--olive-main);
+      color: var(--cream-bg);
+      text-align: center;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      transition: background-color 0.2s ease;
+    }
+
+    .shop-btn:hover {
+      background-color: var(--olive-dark);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem 1rem 0;
+      border-top: 1px solid var(--cream-border);
+      color: var(--olive-muted);
+      font-size: 0.78rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">Curated Aesthetic Finds • Updated Daily</div>
+
+  <header>
+    <h1 class="brand-title">THE OLIVE EDIT</h1>
+    <p class="brand-subtitle">Tap any outfit below or search the Pin # from Pinterest to shop directly.</p>
+  </header>
+
+  <section class="controls">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search by Pin # (e.g. #01) or outfit name...">
+    <div class="filter-group">
+      <button class="filter-btn active" onclick="filterCategory('All', this)">All Finds</button>
+      <button class="filter-btn" onclick="filterCategory('Festive Wear', this)">Festive Wear</button>
+      <button class="filter-btn" onclick="filterCategory('College & Daily', this)">College & Daily</button>
+      <button class="filter-btn" onclick="filterCategory('Jewelry & Bags', this)">Jewelry & Bags</button>
+    </div>
+  </section>
+
+  <main class="grid" id="productGrid"></main>
+
+  <footer>
+    <p>© 2026 The Olive Edit. Curated with love.</p>
+    <p style="margin-top: 0.4rem;">Disclosure: As an Amazon Associate and affiliate partner, I earn from qualifying purchases at no extra cost to you.</p>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // DAILY PIN LIST: ADD YOUR 2 NEW PINS AT THE TOP OF THIS LIST EVERY DAY!
+    // =========================================================================
+    const dailyPins = [
+      {
+        pinNumber: "#02",
+        title: "Antique Gold Temple Jhumka & Choker Set",
+        category: "Jewelry & Bags",
+        image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      },
+      {
+        pinNumber: "#01",
+        title: "Festive Tissue Silk Saree with Embroidered Border",
+        category: "Festive Wear",
+        image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
+        affiliateLink: "https://www.amazon.in/"
+      }
+    ];
+    // =========================================================================
+
+    const grid = document.getElementById('productGrid');
+    const searchInput = document.getElementById('searchInput');
+    let currentCategory = 'All';
+
+    function renderProducts() {
+      const query = searchInput.value.toLowerCase().trim();
+      grid.innerHTML = '';
+
+      const filtered = dailyPins.filter(item => {
+        const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
+        const matchesSearch = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      filtered.forEach(item => {
+        const cleanId = item.pinNumber.replace('#', 'pin-');
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.id = cleanId;
+        card.innerHTML = `
+          <span class="pin-badge">${item.pinNumber}</span>
+          <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
+          <div class="card-content">
+            <div>
+              <span class="category-tag">${item.category}</span>
+              <h2 class="product-title">${item.title}</h2>
+            </div>
+            <a href="${item.affiliateLink}" target="_blank" rel="noopener sponsored" class="shop-btn">Shop This Look →</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(category, btnElement) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderProducts();
+    }
+
+    searchInput.addEventListener('input', renderProducts);
+    renderProducts();
+  </script>
+</body>
+</html>
