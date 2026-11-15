@@ -952,34 +952,15 @@
         image: "pin48.jpg",
         affiliateLink: "🤍 Cream Puffer Jacket & Wide-Leg Cargo Jeans |"
        }
- const grid = document.getElementById('productGrid');
+   const grid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
-    let currentCategory = 'All';         
-    
-    function getDailyOrderedPins(pins) {
-      const latestCount = 4; 
-      const newest = latestCount > 0 ? pins.slice(-latestCount).reverse() : [];
-      const older = latestCount > 0 ? pins.slice(0, -latestCount) : [...pins];
-
-      const today = new Date();
-      let seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-
-      for (let i = older.length - 1; i > 0; i--) {
-        seed = (seed * 9301 + 49297) % 233280;
-        const j = Math.floor((seed / 233280) * (i + 1));
-        [older[i], older[j]] = [older[j], older[i]];
-      }
-
-      return [...newest, ...older];
-    }
-
-    const orderedPins = getDailyOrderedPins(dailyPins);
+    let currentCategory = 'All';
 
     function renderProducts() {
       const query = searchInput.value.toLowerCase().trim();
       grid.innerHTML = '';
 
-      const filtered = orderedPins.filter(item => {
+      const filtered = dailyPins.filter(item => {
         const matchCat = currentCategory === 'All' || item.category === currentCategory;
         const matchText = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
         return matchCat && matchText;
