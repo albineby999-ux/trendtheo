@@ -954,11 +954,10 @@
        }
  const grid = document.getElementById('productGrid');
     const searchInput = document.getElementById('searchInput');
-    let currentCategory = 'All';
-
-    // Keeps your newest pins at the top & shuffles the rest every 24 hours
+    let currentCategory = 'All';         
+    
     function getDailyOrderedPins(pins) {
-      const latestCount = 4; // Change to 0 if you want ALL pins to shuffle daily
+      const latestCount = 4; 
       const newest = latestCount > 0 ? pins.slice(-latestCount).reverse() : [];
       const older = latestCount > 0 ? pins.slice(0, -latestCount) : [...pins];
 
