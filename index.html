@@ -280,7 +280,58 @@
       box-shadow: 0 12px 30px rgba(232, 93, 4, 0.2);
     }
 
-    footer { text-align: center; padding: 3.5rem 1rem 5rem; border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.78rem; background: var(--glass-bg); backdrop-filter: blur(24px); }
+    /* ==========================================================================
+       8. LUXURY MICRO-POLISH (SCROLLBAR, SELECTION, BACK-TO-TOP, IMAGE FADE)
+       ========================================================================== */
+    /* Custom macOS-Style Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(232, 93, 4, 0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(232, 93, 4, 0.6); }
+
+    /* Custom Text Highlight Color */
+    ::selection { background: rgba(232, 93, 4, 0.25); color: inherit; }
+    ::-moz-selection { background: rgba(232, 93, 4, 0.25); color: inherit; }
+
+    /* Silky Image Fade-in */
+    .card-img { animation: smoothFadeIn 0.8s ease-out forwards; }
+    @keyframes smoothFadeIn { from { opacity: 0; filter: blur(4px); } to { opacity: 1; filter: blur(0); } }
+
+    /* Back to Top Glass Arrow */
+    .back-to-top {
+      position: fixed; bottom: 70px; right: 20px; z-index: 90;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border); color: var(--text-main); font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(20px);
+      box-shadow: var(--shadow-glass); transition: all 0.4s var(--apple-ease);
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-4px); border-color: var(--accent-main); color: var(--accent-main); }
+
+    /* ==========================================================================
+       9. MASTER CHOREOGRAPHY & EDGE FADES
+       ========================================================================== */
+    /* 1. Page Load Grand Entrance */
+    header { animation: fadeUp 1.2s var(--apple-ease) backwards; }
+    .sticky-controls { animation: fadeUp 1.2s var(--apple-ease) 0.15s backwards; }
+    #heroCarousel { animation: fadeUp 1.2s var(--apple-ease) 0.3s backwards; }
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 2. Marquee Edge Fade (Seamless Loop) */
+    .marquee-wrap {
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    /* 3. Grid Crossfade Transition */
+    .grid { transition: opacity 0.3s var(--apple-ease); }
+    .grid.fading { opacity: 0 !important; }
   </style>
 </head>
 <body>
@@ -326,7 +377,7 @@
       </div>
     </section>
 
-    <!-- NEW DYNAMIC CAROUSEL FOR LATEST ITEMS -->
+    <!-- DYNAMIC CAROUSEL FOR LATEST ITEMS -->
     <section class="hero-section" id="heroCarousel">
       <h2 class="section-title">Latest Curations</h2>
       <div class="carousel-container">
@@ -343,6 +394,9 @@
 
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Deep Noir Mode</button>
 
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
     <!-- CLASSY PINTEREST INVITATION -->
     <section class="social-cta">
       <p>Curating aesthetics, one look at a time.</p>
@@ -353,7 +407,8 @@
 
     <footer>
       <strong style="letter-spacing: 2px;">TREND THEORY</strong>
-      <p style="margin-top: 0.5rem;">Disclosure: A Verified Amazon Associate.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Curated by Albin Ebi ✦ Engineered with Behavioral Aesthetics</p>
+      <p style="margin-top: 0.4rem; font-size: 0.65rem; opacity: 0.7;">Disclosure: A Verified Amazon Associate.</p>
     </footer>
   </div>
 
@@ -494,38 +549,43 @@
       }, 4000);
     }
 
-    // Render Main Grid based on Search/Filter
+    // Render Main Grid based on Search/Filter (With Crossfade)
     function renderGrid() {
       const query = searchInput.value.toLowerCase().trim();
-      grid.innerHTML = '';
+      
+      // Trigger fade out
+      grid.classList.add('fading');
+      
+      setTimeout(() => {
+        grid.innerHTML = '';
+        const isFiltering = query !== '' || currentCategory !== 'All';
+        const itemsToRender = isFiltering ? reversedPins : archiveItems;
 
-      // If user is searching/filtering, check ALL pins. If not, just show archive.
-      const isFiltering = query !== '' || currentCategory !== 'All';
-      const itemsToRender = isFiltering ? reversedPins : archiveItems;
+        if (isFiltering) {
+          heroSection.classList.add('hidden');
+          gridTitle.textContent = "Search Results";
+        } else {
+          heroSection.classList.remove('hidden');
+          gridTitle.textContent = "The Archive";
+        }
 
-      // Hide hero carousel if searching/filtering so users focus on results
-      if (isFiltering) {
-        heroSection.classList.add('hidden');
-        gridTitle.textContent = "Search Results";
-      } else {
-        heroSection.classList.remove('hidden');
-        gridTitle.textContent = "The Archive";
-      }
+        const filtered = itemsToRender.filter(item => {
+          const matchCat = currentCategory === 'All' || item.category === currentCategory;
+          const matchText = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
+          return matchCat && matchText;
+        });
 
-      const filtered = itemsToRender.filter(item => {
-        const matchCat = currentCategory === 'All' || item.category === currentCategory;
-        const matchText = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
-        return matchCat && matchText;
-      });
-
-      if(filtered.length === 0) {
-         grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No curations found for your search.</p>`;
-         return;
-      }
-
-      filtered.forEach((item, idx) => {
-        grid.insertAdjacentHTML('beforeend', createCardHTML(item, idx));
-      });
+        if(filtered.length === 0) {
+           grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No curations found for your search.</p>`;
+        } else {
+          filtered.forEach((item, idx) => {
+            grid.insertAdjacentHTML('beforeend', createCardHTML(item, idx));
+          });
+        }
+        
+        // Trigger fade back in
+        grid.classList.remove('fading');
+      }, 300);
     }
 
     function filterCategory(category, btn) {
@@ -541,6 +601,16 @@
       root.setAttribute('data-theme', next);
       document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️ Golden Dawn Mode' : '🌙 Deep Noir Mode';
     }
+
+    // Back to Top Button Logic
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
 
     // Init
     initCarousel();
