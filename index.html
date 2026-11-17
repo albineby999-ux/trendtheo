@@ -61,464 +61,234 @@
       --shadow-hover: 0 24px 50px rgba(232, 93, 4, 0.25);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-      background-color: var(--bg-base);
-      color: var(--text-main);
+      width: 100%; max-width: 100%; overflow-x: hidden;
+      background-color: var(--bg-base); color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     /* ==========================================================================
        2. FLUID MESH BACKGROUND + FILM GRAIN
        ========================================================================== */
-    .bg-container {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .mesh-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.65;
-      animation: fluidMesh 18s infinite alternate ease-in-out;
-    }
-
+    .bg-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .mesh-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.65; animation: fluidMesh 18s infinite alternate ease-in-out; }
     .blob-1 { background: var(--blob-1); width: 55vw; height: 55vw; top: -15%; left: -10%; animation-delay: 0s; }
     .blob-2 { background: var(--blob-2); width: 65vw; height: 65vw; bottom: -25%; right: -15%; animation-delay: -4s; }
     .blob-3 { background: var(--blob-3); width: 50vw; height: 50vw; top: 40%; left: 30%; animation-delay: -8s; }
     .blob-4 { background: var(--blob-4); width: 45vw; height: 45vw; top: -5%; right: 10%; animation-delay: -12s; }
-
     @keyframes fluidMesh {
       0% { transform: translate(0, 0) scale(1) rotate(0deg); }
       50% { transform: translate(8vw, 6vh) scale(1.1) rotate(45deg); }
       100% { transform: translate(-5vw, 10vh) scale(0.9) rotate(90deg); }
     }
-
     .noise-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
     }
 
     /* ==========================================================================
        3. FLOWING HEADERS & MARQUEE
        ========================================================================== */
-    .content-wrapper {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .marquee-wrap {
-      width: 100%;
-      background: var(--text-main);
-      color: var(--bg-base);
-      padding: 0.6rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .marquee-track {
-      display: inline-block;
-      animation: marquee 26s linear infinite;
-    }
-
-    .marquee-track span {
-      font-size: 0.68rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin: 0 1.2rem;
-    }
-
+    .content-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; min-height: 100vh; }
+    .marquee-wrap { width: 100%; background: var(--text-main); color: var(--bg-base); padding: 0.6rem 0; overflow: hidden; white-space: nowrap; }
+    .marquee-track { display: inline-block; animation: marquee 26s linear infinite; }
+    .marquee-track span { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin: 0 1.2rem; }
     .dot { color: var(--accent-main); }
-
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    header {
-      text-align: center;
-      padding: 3.5rem 1rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
+    header { text-align: center; padding: 3.5rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
     .eyebrow {
-      display: inline-block;
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 2.8px;
-      color: var(--accent-main);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      padding: 0.4rem 1.2rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: var(--shadow-glass);
+      display: inline-block; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 2.8px; color: var(--accent-main);
+      font-weight: 700; margin-bottom: 1rem; padding: 0.4rem 1.2rem; border: 1px solid var(--glass-border);
+      border-radius: 50px; background: var(--glass-bg); backdrop-filter: blur(12px); box-shadow: var(--shadow-glass);
       animation: floatElement 5s ease-in-out infinite alternate;
     }
+    @keyframes floatElement { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
 
-    @keyframes floatElement {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-4px); }
-    }
-
-    /* Dynamic Glowing Headline */
     .brand-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2.4rem, 7vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: 4px;
-      line-height: 1.1;
-      margin-bottom: 0.8rem;
-      /* Depth & Glow */
-      text-shadow: var(--title-glow);
-      /* Flowing liquid text gradient */
+      font-family: 'Cinzel', serif; font-size: clamp(2.4rem, 7vw, 4.5rem); font-weight: 700; letter-spacing: 4px;
+      line-height: 1.1; margin-bottom: 0.8rem; text-shadow: var(--title-glow);
       background: linear-gradient(100deg, var(--text-main) 30%, var(--accent-main) 50%, var(--text-main) 70%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: liquidGlow 6s linear infinite;
+      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: liquidGlow 6s linear infinite;
     }
-
-    @keyframes liquidGlow {
-      to { background-position: 200% center; }
-    }
-
-    .brand-subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      color: var(--text-muted);
-      opacity: 0.9;
-    }
+    @keyframes liquidGlow { to { background-position: 200% center; } }
+    .brand-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted); opacity: 0.9; }
 
     /* ==========================================================================
-       4. LIQUID GLASS NAVIGATION BAR
+       4. APPLE-STYLE DYNAMIC HERO CAROUSEL
+       ========================================================================== */
+    .hero-section {
+      width: 100%; max-width: 1200px; margin: 0 auto 2rem; padding: 0 0.85rem;
+      opacity: 1; transition: opacity 0.5s var(--apple-ease), height 0.5s var(--apple-ease);
+    }
+    .hero-section.hidden {
+      opacity: 0; pointer-events: none; height: 0; margin-bottom: 0; overflow: hidden;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-main); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    
+    .carousel-container { position: relative; width: 100%; }
+    .carousel-track {
+      display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; padding-bottom: 1rem;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    
+    /* Responsive Carousel Sizing */
+    .carousel-slide { flex: 0 0 85%; scroll-snap-align: center; }
+    @media (min-width: 640px) { .carousel-slide { flex: 0 0 calc(50% - 0.55rem); } }
+    @media (min-width: 1024px) { .carousel-slide { flex: 0 0 calc(33.333% - 0.75rem); } }
+
+    /* Apple-Style Pagination Dots */
+    .carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 0.5rem; }
+    .dot-indicator { width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border); transition: all 0.4s var(--apple-ease); cursor: pointer; }
+    .dot-indicator.active { background: var(--accent-main); transform: scale(1.4); }
+
+    /* ==========================================================================
+       5. LIQUID GLASS NAVIGATION BAR
        ========================================================================== */
     .sticky-controls {
-      position: sticky;
-      top: 15px;
-      z-index: 40;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 2rem;
-      padding: 0 0.85rem;
+      position: sticky; top: 15px; z-index: 40; width: 100%; max-width: 1200px; margin: 0 auto 2.5rem; padding: 0 0.85rem;
     }
-
     .controls-inner {
-      background: var(--glass-bg);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-highlight); /* Specular highlight */
-      border-radius: 24px;
-      padding: 0.8rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      box-shadow: var(--shadow-glass);
-      transition: all 0.4s var(--apple-ease);
+      background: var(--glass-bg); backdrop-filter: blur(32px) saturate(200%); -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-radius: 24px;
+      padding: 0.8rem 1rem; display: flex; flex-direction: column; gap: 0.7rem; box-shadow: var(--shadow-glass); transition: all 0.4s var(--apple-ease);
     }
-
     .search-box {
-      width: 100%;
-      height: 44px;
-      padding: 0 1.2rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text-main);
-      font-size: 0.85rem;
-      outline: none;
-      transition: all 0.3s var(--apple-ease);
+      width: 100%; height: 44px; padding: 0 1.2rem; border: 1px solid var(--glass-border); border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15); color: var(--text-main); font-size: 0.85rem; outline: none; transition: all 0.3s var(--apple-ease);
     }
-
-    .search-box:focus {
-      border-color: var(--accent-main);
-      background: var(--card-bg);
-      box-shadow: 0 0 15px rgba(232, 93, 4, 0.2);
-    }
-
-    .filter-group {
-      display: flex;
-      gap: 0.5rem;
-      width: 100%;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
+    .search-box:focus { border-color: var(--accent-main); background: var(--card-bg); box-shadow: 0 0 15px rgba(232, 93, 4, 0.2); }
+    
+    .filter-group { display: flex; gap: 0.5rem; width: 100%; overflow-x: auto; scrollbar-width: none; }
     .filter-group::-webkit-scrollbar { display: none; }
-
     .filter-btn {
-      flex: 0 0 auto;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      padding: 0.55rem 1.1rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.4s var(--apple-ease);
+      flex: 0 0 auto; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--glass-border); color: var(--text-muted);
+      padding: 0.55rem 1.1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.4s var(--apple-ease);
     }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(232, 93, 4, 0.3);
-    }
-
+    .filter-btn.active, .filter-btn:hover { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232, 93, 4, 0.3); }
     @media (min-width: 820px) {
-      .controls-inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 50px;
-      }
-      .search-box { max-width: 340px; }
-      .filter-group { width: auto; }
+      .controls-inner { flex-direction: row; justify-content: space-between; align-items: center; border-radius: 50px; }
+      .search-box { max-width: 340px; } .filter-group { width: auto; }
     }
 
     /* ==========================================================================
-       5. LIQUID GLASS ROUNDED RECTANGLE CARDS (APPLE STYLE)
+       6. LIQUID GLASS ROUNDED RECTANGLE CARDS & GRID
        ========================================================================== */
+    .archive-section { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 0.85rem; }
+    
     .grid {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 0.85rem 4.5rem;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.1rem;
-      flex-grow: 1;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; padding-bottom: 4.5rem;
     }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.8rem; } }
 
-    @media (min-width: 640px) {
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; padding: 0 1.25rem 4.5rem; }
-    }
-    @media (min-width: 1024px) {
-      .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.8rem; }
-    }
-
-    /* The core liquid glass element */
     .card {
-      width: 100%;
-      position: relative;
-      background: var(--card-bg);
-      backdrop-filter: blur(28px) saturate(200%); /* Heavy liquid blur */
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      /* Apple rounded rectangle corners */
-      border-radius: 24px;
-      /* Specular glass reflection borders */
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-highlight);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.6rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-glass);
-      overflow: hidden;
-      
-      /* Smooth flowing load animation */
-      opacity: 0;
-      transform: translateY(40px) scale(0.96);
-      animation: liquidEnter 0.9s var(--apple-ease) forwards;
+      width: 100%; position: relative; background: var(--card-bg); backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-radius: 24px; border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.6rem; display: flex; flex-direction: column; box-shadow: var(--shadow-glass); overflow: hidden;
+      opacity: 0; transform: translateY(40px) scale(0.96); animation: liquidEnter 0.9s var(--apple-ease) forwards;
       transition: transform 0.6s var(--apple-ease), box-shadow 0.6s var(--apple-ease), border-color 0.4s ease;
     }
-
-    @keyframes liquidEnter { 
-      to { opacity: 1; transform: translateY(0) scale(1); } 
-    }
-
-    /* Glare sheen overlay on hover */
+    @keyframes liquidEnter { to { opacity: 1; transform: translateY(0) scale(1); } }
+    
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.7s var(--apple-ease);
-      z-index: 20;
-      pointer-events: none;
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-20deg); transition: left 0.7s var(--apple-ease); z-index: 20; pointer-events: none;
     }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--accent-main);
-    }
-
-    .card:hover::before {
-      left: 200%;
-    }
+    .card:hover { transform: translateY(-8px) scale(1.01); box-shadow: var(--shadow-hover); border-color: var(--accent-main); }
+    .card:hover::before { left: 200%; }
 
     .img-container {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-      position: relative;
-      /* Matches the card's outer radius to look flawless */
-      border-radius: 18px 18px 6px 6px;
-      background: rgba(251, 133, 0, 0.05);
-      mask-image: radial-gradient(white, black); /* Fixes Safari overflow bugs */
-      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      width: 100%; aspect-ratio: 3 / 4; overflow: hidden; position: relative; border-radius: 18px 18px 6px 6px;
+      background: rgba(251, 133, 0, 0.05); mask-image: radial-gradient(white, black); -webkit-mask-image: -webkit-radial-gradient(white, black);
     }
-
-    .card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.8s var(--apple-ease);
-    }
-
+    .card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--apple-ease); }
     .card:hover .card-img { transform: scale(1.07); }
 
     .pin-badge {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      z-index: 2;
-      background: rgba(42, 22, 5, 0.7);
-      color: #FFF;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.3rem 0.7rem;
-      border-radius: 20px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
+      position: absolute; bottom: 12px; left: 12px; z-index: 2; background: rgba(42, 22, 5, 0.7); color: #FFF; font-size: 0.68rem;
+      font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15);
     }
-
     .trend-badge {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      z-index: 2;
-      background: var(--btn-bg);
-      color: #FFF;
-      font-size: 0.58rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 0.3rem 0.65rem;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(232, 93, 4, 0.4);
+      position: absolute; bottom: 12px; right: 12px; z-index: 2; background: var(--btn-bg); color: #FFF; font-size: 0.58rem;
+      font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.65rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(232, 93, 4, 0.4);
     }
 
-    .card-content {
-      padding: 1rem 0.4rem 0.4rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      justify-content: space-between;
-      text-align: center;
-    }
-
-    .category-tag {
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      color: var(--accent-main);
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-
+    .card-content { padding: 1rem 0.4rem 0.4rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; text-align: center; }
+    .category-tag { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1.4px; color: var(--accent-main); font-weight: 800; margin-bottom: 0.4rem; display: block; }
     .product-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.06rem, 2.5vw, 1.35rem);
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.9rem;
-      line-height: 1.25;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.06rem, 2.5vw, 1.35rem); font-weight: 700; color: var(--text-main);
+      margin-bottom: 0.9rem; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
-
     .shop-btn {
-      display: block;
-      width: 100%;
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      text-align: center;
-      text-decoration: none;
-      padding: 0.7rem 0.4rem;
-      border-radius: 14px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      transition: transform 0.4s var(--apple-ease), box-shadow 0.4s var(--apple-ease);
+      display: block; width: 100%; background: var(--btn-bg); color: var(--btn-text); text-align: center; text-decoration: none;
+      padding: 0.7rem 0.4rem; border-radius: 14px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; transition: transform 0.4s var(--apple-ease), box-shadow 0.4s var(--apple-ease);
     }
-
-    .shop-btn:hover { 
-      transform: scale(1.03); 
-      box-shadow: 0 6px 20px rgba(232, 93, 4, 0.3);
-    }
+    .shop-btn:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(232, 93, 4, 0.3); }
 
     .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 90;
-      background: var(--btn-bg);
-      color: #FFF;
-      border: none;
-      padding: 0.7rem 1.2rem;
+      position: fixed; bottom: 20px; right: 20px; z-index: 90; background: var(--btn-bg); color: #FFF; border: none;
+      padding: 0.7rem 1.2rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; cursor: pointer; box-shadow: var(--shadow-glass); transition: transform 0.4s var(--apple-ease);
+    }
+    .theme-toggle:hover { transform: scale(1.05) translateY(-2px); }
+
+    /* ==========================================================================
+       7. CLASSY SOCIAL CTA
+       ========================================================================== */
+    .social-cta {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .social-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+    
+    .pinterest-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.85rem 2.2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid var(--glass-border);
       border-radius: 50px;
+      color: var(--text-main);
       font-size: 0.78rem;
       font-weight: 700;
-      cursor: pointer;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
       box-shadow: var(--shadow-glass);
-      transition: transform 0.4s var(--apple-ease);
+      transition: all 0.5s var(--apple-ease);
+    }
+    
+    .pinterest-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--accent-main);
+      color: var(--accent-main);
+      box-shadow: 0 12px 30px rgba(232, 93, 4, 0.2);
     }
 
-    .theme-toggle:hover {
-      transform: scale(1.05) translateY(-2px);
-    }
-
-    footer {
-      text-align: center;
-      padding: 3.5rem 1rem 5rem;
-      border-top: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      font-size: 0.78rem;
-      background: var(--glass-bg);
-      backdrop-filter: blur(24px);
-    }
+    footer { text-align: center; padding: 3.5rem 1rem 5rem; border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.78rem; background: var(--glass-bg); backdrop-filter: blur(24px); }
   </style>
 </head>
 <body>
 
   <!-- The Animated Liquid Background -->
   <div class="bg-container">
-    <div class="mesh-blob blob-1"></div>
-    <div class="mesh-blob blob-2"></div>
-    <div class="mesh-blob blob-3"></div>
-    <div class="mesh-blob blob-4"></div>
+    <div class="mesh-blob blob-1"></div><div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div><div class="mesh-blob blob-4"></div>
   </div>
   <div class="noise-overlay"></div>
 
@@ -540,14 +310,14 @@
     <header>
       <span class="eyebrow">✦ Beyond Trends, Into Timelessness ✦</span>
       <h1 class="brand-title">TREND THEORY</h1>
-      <p class="brand-subtitle">Tap any curated look below or search the Pin # from Pinterest to shop directly.</p>
+      <p class="brand-subtitle">Tap any curated look below or search the Pin # from Pinterest to acquire directly.</p>
     </header>
 
     <section class="sticky-controls">
       <div class="controls-inner">
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search Pin # (e.g. #14) or outfit...">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Discover Pin # (e.g. #14)...">
         <div class="filter-group">
-          <button class="filter-btn active" onclick="filterCategory('All', this)">All Edits</button>
+          <button class="filter-btn active" onclick="filterCategory('All', this)">The Collection</button>
           <button class="filter-btn" onclick="filterCategory('Festive Wear', this)">Festive Wear</button>
           <button class="filter-btn" onclick="filterCategory('College & Daily', this)">College & Daily</button>
           <button class="filter-btn" onclick="filterCategory('Office Outfit', this)">Office Outfit</button>
@@ -556,9 +326,30 @@
       </div>
     </section>
 
-    <main class="grid" id="productGrid"></main>
+    <!-- NEW DYNAMIC CAROUSEL FOR LATEST ITEMS -->
+    <section class="hero-section" id="heroCarousel">
+      <h2 class="section-title">Latest Curations</h2>
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </section>
+
+    <!-- THE ARCHIVE GRID FOR OLDER ITEMS & SEARCHING -->
+    <section class="archive-section">
+      <h2 class="section-title" id="gridTitle">The Archive</h2>
+      <main class="grid" id="productGrid"></main>
+    </section>
 
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Deep Noir Mode</button>
+
+    <!-- CLASSY PINTEREST INVITATION -->
+    <section class="social-cta">
+      <p>Curating aesthetics, one look at a time.</p>
+      <a href="https://pin.it/6vXGYTnEv" target="_blank" rel="noopener noreferrer" class="pinterest-btn">
+        Explore The Visual Diary on Pinterest ✦
+      </a>
+    </section>
 
     <footer>
       <strong style="letter-spacing: 2px;">TREND THEORY</strong>
@@ -567,445 +358,79 @@
   </div>
 
   <script>
+    // Full 52 items array
     const dailyPins = [
-      {
-        pinNumber: "#01",
-        title: "Royal Tissue Gold Draped Saree with Designer Blouse",
-        category: "Festive Wear",
-        badge: "Bestseller ⭐",
-        image: "pin01.jpg",
-        affiliateLink: "https://link.amazon/B0aMNf9Eh"
-      },
-      {
-        pinNumber: "#02",
-        title: "👖✨ The Ultimate Light Blue Wide-Leg Jeans ",
-        category: "OOTD",
-        badge: "Under ₹699",
-        image: "pin02.jpg",
-        affiliateLink: "https://link.amazon/B0hHJOtJZ"
-      },
-      {
-        pinNumber: "#03",
-        title: "Elegant Cream & Pink Salwar Suit ✨",
-        category: "Festive Wear",
-        badge: "Pink Salwar ✨",
-        image: "pin03.jpg",
-        affiliateLink: "https://link.amazon/B08KIOBuh"
-      },
-      {
-        pinNumber: "#04",
-        title: "🩵 Elegant Sky Blue Salwar Suit ✨ ",
-        category: "Festive Wear",
-        badge: "Trending 🔥",
-        image: "pin04.jpg",
-        affiliateLink: "https://link.amazon/B03LPPiWr"
-      },
-      {
-        pinNumber: "#05",
-        title: "🖤 Elegant Black Kurta Set ✨ ",
-        category: "Festive Wear",
-        badge: "Diwali Special ✨",
-        image: "pin05.jpg",
-        affiliateLink: "https://link.amazon/B0cc5OOrb"
-      },
-      {
-        pinNumber: "#06",
-        title: "🌸 Olive Green Embroidered Kurti 💚",
-        category: "College & Daily",
-        badge: "Trending 🔥",
-        image: "pin06.jpg",
-        affiliateLink: "https://link.amazon/B0ip29CnU"
-      },
-      {
-        pinNumber: "#07",
-        title: "💜 Elegant Lavender Kurti ✨",
-        category: "College & Daily",
-        badge: "Under ₹299",
-        image: "pin07.jpg",
-        affiliateLink: "https://link.amazon/B0f9AvDX0"
-      },
-      {
-        pinNumber: "#08",
-        title: "💙 Elegant Blue Kurti for Women ✨",
-        category: "College & Daily",
-        badge: "Bestseller ⭐",
-        image: "pin08.jpg",
-        affiliateLink: "https://link.amazon/B0aRAK022"
-      },
-      {
-        pinNumber: "#09",
-        title: "🤍 Aesthetic Printed Sleeve Sweater ✨",
-        category: "College & Daily",
-        badge: "Korean Edit 💫",
-        image: "pin09.jpg",
-        affiliateLink: "https://link.amazon/B0eI4jl3J"
-      },
-      {
-        pinNumber: "#10",
-        title: "🖤 Elegant Black & Beige Printed Saree ✨",
-        category: "Festive Wear",
-        badge: "Festive Hit ✨",
-        image: "pin10.jpg",
-        affiliateLink: "https://link.amazon/B0fqJTCHx"
-      },
-      {
-        pinNumber: "#11",
-        title: "🤎 Rust Orange Embroidered Top ✨",
-        category: "College & Daily",
-        badge: "Embroidery ✨",
-        image: "pin11.jpg",
-        affiliateLink: "https://link.amazon/B05a8VDVs"
-      },
-      {
-        pinNumber: "#12",
-        title: "🤍 Classic White Shirt",
-        category: "Office Outfit",
-        badge: "Classic ✨",
-        image: "pin12.jpg",
-        affiliateLink: "https://link.amazon/B0akbBcJj"
-      },
-      {
-        pinNumber: "#13",
-        title: "💙 Elegant Navy Blue Co-Ord Set ✨",
-        category: "College & Daily",
-        badge: "Trending ✨",
-        image: "pin13.jpg",
-        affiliateLink: "https://link.amazon/B0dJPN3Oz"
-      },
-      {
-        pinNumber: "#14",
-        title: "🌸 Elegant Baby Pink Embroidered Kurti Set ✨",
-        category: "College & Daily",
-        badge: "Floral ✨",
-        image: "pin14.jpg",
-        affiliateLink: "https://link.amazon/B0hevyxQr"
-      },
-      {
-        pinNumber: "#15",
-        title: "💙 Teal Blue Printed Kurta Set with Dupatta ✨",
-        category: "College & Daily",
-        badge: "Trending ✨",
-        image: "pin15.jpg",
-        affiliateLink: "https://link.amazon/B0iRyDJHc"
-      },
-      {
-        pinNumber: "#16",
-        title: "🌸 Elegant Beige Floral Anarkali Suit Set 🌺",
-        category: "College & Daily",
-        badge: "Slayy✨",
-        image: "pin16.jpg",
-        affiliateLink: "https://link.amazon/B0hZqQwu2"
-      },
-      {
-        pinNumber: "#17",
-        title: "🖤 Minimalist Black Kurti & Beige Palazzo Set ✨",
-        category: "College & Daily",
-        badge: "Classy✨",
-        image: "pin17.jpg",
-        affiliateLink: "https://link.amazon/B0eSS7Oxu"
-      },
-      {
-        pinNumber: "#18",
-        title: "🖤  Black Batwing Sleeve Top",
-        category: "College & Daily",
-        badge: "Casual✨",
-        image: "pin18.jpg",
-        affiliateLink: "https://link.amazon/B0cQQzRVx"
-      },
-      {
-        pinNumber: "#19",
-        title: "❤️ Elegant Black Anarkali Suit with Maroon Printed Dupatta ✨",
-        category: "Festive Wear",
-        badge: "Casual✨",
-        image: "pin19.jpg",
-        affiliateLink: "https://link.amazon/B0cmyc5nj"
-      },
-      {
-        pinNumber: "#20",
-        title: "🖤 Elegant Black Maxi Dress with Puff Sleeves ✨",
-        category: "College & Daily",
-        badge: "Prom Wear✨",
-        image: "pin20.jpg",
-        affiliateLink: "https://link.amazon/B0iVd0lXs"
-      },
-      {
-        pinNumber: "#21",
-        title: "🖤 Elegant Black Off-Shoulder Maxi Dress with Side Slit ✨",
-        category: "OOTD",
-        badge: "Under ₹699",
-        image: "pin21.jpg",
-        affiliateLink: "https://link.amazon/B01gIrv84"
-      },
-      {
-        pinNumber: "#22",
-        title: "🖤 Elegant Black Cut-Out Dress ✨ | Chic Minimalist Evening Fashion 🥂 ",
-        category: "OOTD",
-        badge: "Under ₹799",
-        image: "pin22.jpg",
-        affiliateLink: "https://link.amazon/B04psgV1I"
-       },
-       {
-        pinNumber: "#23",
-        title: "🍷 Elegant Burgundy Midi Dress ❤️ | Classy Christmas Party & Holiday Outfit ✨🎄",
-        category: "OOTD",
-        badge: "X-Mas",
-        image: "pin23.jpg",
-        affiliateLink: "https://link.amazon/B02ZyO005"
-      },
-       {
-        pinNumber: "#24",
-        title: "🎄 Elegant Christmas Party Jumpsuit",
-        category: "OOTD",
-        badge: "Slayy",
-        image: "pin24.jpg",
-        affiliateLink: "https://link.amazon/B0fFh1IkL"
-       },
-       {
-        pinNumber: "#25",
-        title: "☕ Elegant Beige Knit Midi Dress | Classy Christmas Brunch",
-        category: "OOTD",
-        badge: "X-Mas",
-        image: "pin25.jpg",
-        affiliateLink: "https://link.amazon/B0gUv4G4I"
-      },
-       {
-        pinNumber: "#26",
-        title: "  🌸 Elegant Floral Maxi Dress | Feminine Holiday Outfit",
-        category: "OOTD",
-        badge: "Floral",
-        image: "pin26.jpg",
-        affiliateLink: "https://link.amazon/B03fVUtql"
-      },
-      {
-        pinNumber: "#27",
-        title: "🫒 Chic Olive Green Corduroy Jacket",
-        category: "OOTD",
-        badge: "Slayy",
-        image: "pin27.jpg",
-        affiliateLink: "https://link.amazon/B02MrIYl5"
-       },
-      {
-        pinNumber: "#28",
-        title: "🤍 Elegant White Button-Down Blouse",
-        category: "OOTD",
-        badge: "White",
-        image: "pin28.jpg",
-        affiliateLink: "https://link.amazon/B02KzXzhk"
-       },
-       {
-        pinNumber: "#29",
-        title: "❤️ Elegant Red Midi Dress | Timeless Christmas Party Outfit Inspiration ✨",
-        category: "OOTD",
-        badge: "Redd",
-        image: "pin29.jpg",
-        affiliateLink: "https://link.amazon/B0eMtlBM2"
-       },
-       {
-        pinNumber: "#30",
-        title: "🍷 Burgundy Shirt Dress | Classy & Sophisticated Christmas Holiday Look ✨",
-        category: "OOTD",
-        badge: "Classy",
-        image: "pin30.jpg",
-        affiliateLink: "https://link.amazon/B0ear3bwM"
-       },
-       {
-        pinNumber: "#31",
-        title: "🖤 Elegant Black Puff Sleeve Mini Dress ",
-        category: "OOTD",
-        badge: "Black",
-        image: "pin31.jpg",
-        affiliateLink: "https://link.amazon/B07VqInoy"
-       },
-       {
-        pinNumber: "#32",
-        title: "🌸 Pink Floral Co-Ord Set | Chic Summer Vacation",
-        category: "OOTD",
-        badge: "Pink",
-        image: "pin32.jpg",
-        affiliateLink: "https://link.amazon/B06c8rsRH"
-       },
-       {
-        pinNumber: "#33",
-        title: "🖤 Sleek Black Bodycon Maxi Dress ",
-        category: "OOTD",
-        badge: "Black",
-        image: "pin33.jpg",
-        affiliateLink: "https://link.amazon/B0gKv8yya"
-       },
-       {
-        pinNumber: "#34",
-        title: "🍷 Elegant Burgundy Mini Dress | Classic Square Neck Evening Look ✨ ",
-        category: "OOTD",
-        badge: "Burgandy",
-        image: "pin34.jpg",
-        affiliateLink: "https://link.amazon/B0etIa4JK"
-       },
-       {
-        pinNumber: "#35",
-        title: "🌺 Elegant Magenta Embroidered Anarkali Suit",
-        category: "Festive Wear",
-        badge: "Anarkali",
-        image: "pin35.jpg",
-        affiliateLink: "https://link.amazon/B04CjulnH"
-       },
-       {
-        pinNumber: "#36",
-        title: "🤎 Elegant Chocolate Brown Midi Dress | Classy Puff Sleeve Dress ",
-        category: "OOTD",
-        badge: "Brown",
-        image: "pin36.jpg",
-        affiliateLink: "https://link.amazon/B02dPlCI9"
-       },
-       {
-        pinNumber: "#37",
-        title: "🖤 Striped Ribbed Turtleneck & Denim Jeans",
-        category: "OOTD",
-        badge: "Stripes",
-        image: "pin37.jpg",
-        affiliateLink: "https://link.amazon/B08nwTNZT"
-       }, 
-       {
-        pinNumber: "#38",
-        title: "🍷 Burgundy Zip-Up Hoodie & Black Cargo Pants",
-        category: "OOTD",
-        badge: "COZY",
-        image: "pin38.jpg",
-        affiliateLink: "https://link.amazon/B0f0TtODn"
-       },
-      {
-        pinNumber: "#39",
-        title: "🤍 Cream Ribbed Turtleneck & Wide Leg Denim | Clean Girl Aesthetic ✨",
-        category: "OOTD",
-        badge: "Clean",
-        image: "pin39.jpg",
-        affiliateLink: "https://link.amazon/B047RgoSa"
-       },
-       {
-        pinNumber: "#40",
-        title: "🤎 Brown Striped Knit Sweater & Dark Denim Jeans | Cozy Fall Streetwear ✨",
-        category: "OOTD",
-        badge: "Knit",
-        image: "pin40.jpg",
-        affiliateLink: "https://link.amazon/B0gnWMWkk"
-       },
-       {
-        pinNumber: "#41",
-        title: "🧥 Classic Denim Jacket & Vintage Shades | Effortless City Street Style ✨",
-        category: "OOTD",
-        badge: "Denim",
-        image: "pin41.jpg",
-        affiliateLink: "https://link.amazon/B08R5U7Vn"
-       }, 
-       {
-        pinNumber: "#42",
-        title: "🤍 White Eyelet Midi Dress | Breezy Summer Elegance ✨",
-        category: "OOTD",
-        badge: "Midi",
-        image: "pin42.jpg",
-        affiliateLink: "https://link.amazon/B07Yz3X6O"
-       },
-       {
-        pinNumber: "#43",
-        title: "❤️ Royal Red Embroidered Anarkali Suit Set | Festive Ethnic Elegance ✨",
-        category: "OOTD",
-        badge: "Trending ✨",
-        image: "pin43.jpg",
-        affiliateLink: "https://link.amazon/B0dMeVtGp"
-      }, 
-      {
-        pinNumber: "#44",
-        title: "🍷 Maroon Anarkali Kurta & Palazzo Set | Minimalist Ethnic Wear ✨",
-        category: "College & Daily",
-        badge: "Palazzo✨",
-        image: "pin44.jpg",
-        affiliateLink: "https://link.amazon/B0drVdNGm"
-      },
-       {
-        pinNumber: "#45",
-        title: "💙 Navy Blue plain Shirt ",
-        category: "College & Daily",
-        badge: "Classy✨",
-        image: "pin45.jpg",
-        affiliateLink: "https://link.amazon/B01Z0FQaV"
-      }, 
-      {
-        pinNumber: "#46",
-        title: "🍷 Crimson Off-Shoulder Draped Top ",
-        category: "College & Daily",
-        badge: "Slayy✨",
-        image: "pin46.jpg",
-        affiliateLink: "https://link.amazon/B08X9gr9r"
-      },
-       {
-        pinNumber: "#47",
-        title: "🤎 Camel Fur-Trimmed Puffer Jacket & Light Wash Jeans",
-        category: "OOTD",
-        badge: "Puff",
-        image: "pin47.jpg",
-        affiliateLink: "https://link.amazon/B0gaeW78M"
-       },
-       {
-        pinNumber: "#48",
-        title: "🤍 Cream Puffer Jacket & Wide-Leg Cargo Jeans |",
-        category: "OOTD",
-        badge: "Jacket",
-        image: "pin48.jpg",
-        affiliateLink: "🤍 Cream Puffer Jacket & Wide-Leg Cargo Jeans |"
-       },
-        {
-        pinNumber: "#49",
-        title: "🖤 Black & Beige Block Print Tiered Maxi Dress",
-        category: "OOTD",
-        badge: "Maxi",
-        image: "pin49.jpg",
-        affiliateLink: "https://link.amazon/B0fS2qoqi"
-       },
-        {
-        pinNumber: "#50",
-        title: "💙 White & Blue Bow Print Tiered Midi Dress",
-        category: "OOTD",
-        badge: "MIDI",
-        image: "pin50.jpg",
-        affiliateLink: "https://link.amazon/B08pPfdzm"
-       },
-      {
-        pinNumber: "#51",
-        title: "💚 Sage Green Puff-Sleeve Tiered Maxi Dress |",
-        category: "OOTD",
-        badge: "Maxi",
-        image: "pin51.jpg",
-        affiliateLink: "https://link.amazon/B04hHC9qQ"
-       },
-      {
-        pinNumber: "#52",
-        title: "🖤 Black Sheer-Sleeve Wrap Midi Dress | Classy Evening & Cocktail Elegance ✨",
-        category: "OOTD",
-        badge: "MIDI",
-        image: "pin52.jpg",
-        affiliateLink: "https://link.amazon/B0j9EWX2e"
-       }
+      { pinNumber: "#01", title: "Royal Tissue Gold Draped Saree with Designer Blouse", category: "Festive Wear", badge: "Bestseller ⭐", image: "pin01.jpg", affiliateLink: "https://link.amazon/B0aMNf9Eh" },
+      { pinNumber: "#02", title: "👖✨ The Ultimate Light Blue Wide-Leg Jeans ", category: "OOTD", badge: "Under ₹699", image: "pin02.jpg", affiliateLink: "https://link.amazon/B0hHJOtJZ" },
+      { pinNumber: "#03", title: "Elegant Cream & Pink Salwar Suit ✨", category: "Festive Wear", badge: "Pink Salwar ✨", image: "pin03.jpg", affiliateLink: "https://link.amazon/B08KIOBuh" },
+      { pinNumber: "#04", title: "🩵 Elegant Sky Blue Salwar Suit ✨ ", category: "Festive Wear", badge: "Trending 🔥", image: "pin04.jpg", affiliateLink: "https://link.amazon/B03LPPiWr" },
+      { pinNumber: "#05", title: "🖤 Elegant Black Kurta Set ✨ ", category: "Festive Wear", badge: "Diwali Special ✨", image: "pin05.jpg", affiliateLink: "https://link.amazon/B0cc5OOrb" },
+      { pinNumber: "#06", title: "🌸 Olive Green Embroidered Kurti 💚", category: "College & Daily", badge: "Trending 🔥", image: "pin06.jpg", affiliateLink: "https://link.amazon/B0ip29CnU" },
+      { pinNumber: "#07", title: "💜 Elegant Lavender Kurti ✨", category: "College & Daily", badge: "Under ₹299", image: "pin07.jpg", affiliateLink: "https://link.amazon/B0f9AvDX0" },
+      { pinNumber: "#08", title: "💙 Elegant Blue Kurti for Women ✨", category: "College & Daily", badge: "Bestseller ⭐", image: "pin08.jpg", affiliateLink: "https://link.amazon/B0aRAK022" },
+      { pinNumber: "#09", title: "🤍 Aesthetic Printed Sleeve Sweater ✨", category: "College & Daily", badge: "Korean Edit 💫", image: "pin09.jpg", affiliateLink: "https://link.amazon/B0eI4jl3J" },
+      { pinNumber: "#10", title: "🖤 Elegant Black & Beige Printed Saree ✨", category: "Festive Wear", badge: "Festive Hit ✨", image: "pin10.jpg", affiliateLink: "https://link.amazon/B0fqJTCHx" },
+      { pinNumber: "#11", title: "🤎 Rust Orange Embroidered Top ✨", category: "College & Daily", badge: "Embroidery ✨", image: "pin11.jpg", affiliateLink: "https://link.amazon/B05a8VDVs" },
+      { pinNumber: "#12", title: "🤍 Classic White Shirt", category: "Office Outfit", badge: "Classic ✨", image: "pin12.jpg", affiliateLink: "https://link.amazon/B0akbBcJj" },
+      { pinNumber: "#13", title: "💙 Elegant Navy Blue Co-Ord Set ✨", category: "College & Daily", badge: "Trending ✨", image: "pin13.jpg", affiliateLink: "https://link.amazon/B0dJPN3Oz" },
+      { pinNumber: "#14", title: "🌸 Elegant Baby Pink Embroidered Kurti Set ✨", category: "College & Daily", badge: "Floral ✨", image: "pin14.jpg", affiliateLink: "https://link.amazon/B0hevyxQr" },
+      { pinNumber: "#15", title: "💙 Teal Blue Printed Kurta Set with Dupatta ✨", category: "College & Daily", badge: "Trending ✨", image: "pin15.jpg", affiliateLink: "https://link.amazon/B0iRyDJHc" },
+      { pinNumber: "#16", title: "🌸 Elegant Beige Floral Anarkali Suit Set 🌺", category: "College & Daily", badge: "Slayy✨", image: "pin16.jpg", affiliateLink: "https://link.amazon/B0hZqQwu2" },
+      { pinNumber: "#17", title: "🖤 Minimalist Black Kurti & Beige Palazzo Set ✨", category: "College & Daily", badge: "Classy✨", image: "pin17.jpg", affiliateLink: "https://link.amazon/B0eSS7Oxu" },
+      { pinNumber: "#18", title: "🖤  Black Batwing Sleeve Top", category: "College & Daily", badge: "Casual✨", image: "pin18.jpg", affiliateLink: "https://link.amazon/B0cQQzRVx" },
+      { pinNumber: "#19", title: "❤️ Elegant Black Anarkali Suit with Maroon Printed Dupatta ✨", category: "Festive Wear", badge: "Casual✨", image: "pin19.jpg", affiliateLink: "https://link.amazon/B0cmyc5nj" },
+      { pinNumber: "#20", title: "🖤 Elegant Black Maxi Dress with Puff Sleeves ✨", category: "College & Daily", badge: "Prom Wear✨", image: "pin20.jpg", affiliateLink: "https://link.amazon/B0iVd0lXs" },
+      { pinNumber: "#21", title: "🖤 Elegant Black Off-Shoulder Maxi Dress with Side Slit ✨", category: "OOTD", badge: "Under ₹699", image: "pin21.jpg", affiliateLink: "https://link.amazon/B01gIrv84" },
+      { pinNumber: "#22", title: "🖤 Elegant Black Cut-Out Dress ✨ | Chic Minimalist Evening Fashion 🥂 ", category: "OOTD", badge: "Under ₹799", image: "pin22.jpg", affiliateLink: "https://link.amazon/B04psgV1I" },
+      { pinNumber: "#23", title: "🍷 Elegant Burgundy Midi Dress ❤️ | Classy Christmas Party & Holiday Outfit ✨🎄", category: "OOTD", badge: "X-Mas", image: "pin23.jpg", affiliateLink: "https://link.amazon/B02ZyO005" },
+      { pinNumber: "#24", title: "🎄 Elegant Christmas Party Jumpsuit", category: "OOTD", badge: "Slayy", image: "pin24.jpg", affiliateLink: "https://link.amazon/B0fFh1IkL" },
+      { pinNumber: "#25", title: "☕ Elegant Beige Knit Midi Dress | Classy Christmas Brunch", category: "OOTD", badge: "X-Mas", image: "pin25.jpg", affiliateLink: "https://link.amazon/B0gUv4G4I" },
+      { pinNumber: "#26", title: "🌸 Elegant Floral Maxi Dress | Feminine Holiday Outfit", category: "OOTD", badge: "Floral", image: "pin26.jpg", affiliateLink: "https://link.amazon/B03fVUtql" },
+      { pinNumber: "#27", title: "🫒 Chic Olive Green Corduroy Jacket", category: "OOTD", badge: "Slayy", image: "pin27.jpg", affiliateLink: "https://link.amazon/B02MrIYl5" },
+      { pinNumber: "#28", title: "🤍 Elegant White Button-Down Blouse", category: "OOTD", badge: "White", image: "pin28.jpg", affiliateLink: "https://link.amazon/B02KzXzhk" },
+      { pinNumber: "#29", title: "❤️ Elegant Red Midi Dress | Timeless Christmas Party Outfit Inspiration ✨", category: "OOTD", badge: "Redd", image: "pin29.jpg", affiliateLink: "https://link.amazon/B0eMtlBM2" },
+      { pinNumber: "#30", title: "🍷 Burgundy Shirt Dress | Classy & Sophisticated Christmas Holiday Look ✨", category: "OOTD", badge: "Classy", image: "pin30.jpg", affiliateLink: "https://link.amazon/B0ear3bwM" },
+      { pinNumber: "#31", title: "🖤 Elegant Black Puff Sleeve Mini Dress ", category: "OOTD", badge: "Black", image: "pin31.jpg", affiliateLink: "https://link.amazon/B07VqInoy" },
+      { pinNumber: "#32", title: "🌸 Pink Floral Co-Ord Set | Chic Summer Vacation", category: "OOTD", badge: "Pink", image: "pin32.jpg", affiliateLink: "https://link.amazon/B06c8rsRH" },
+      { pinNumber: "#33", title: "🖤 Sleek Black Bodycon Maxi Dress ", category: "OOTD", badge: "Black", image: "pin33.jpg", affiliateLink: "https://link.amazon/B0gKv8yya" },
+      { pinNumber: "#34", title: "🍷 Elegant Burgundy Mini Dress | Classic Square Neck Evening Look ✨ ", category: "OOTD", badge: "Burgandy", image: "pin34.jpg", affiliateLink: "https://link.amazon/B0etIa4JK" },
+      { pinNumber: "#35", title: "🌺 Elegant Magenta Embroidered Anarkali Suit", category: "Festive Wear", badge: "Anarkali", image: "pin35.jpg", affiliateLink: "https://link.amazon/B04CjulnH" },
+      { pinNumber: "#36", title: "🤎 Elegant Chocolate Brown Midi Dress | Classy Puff Sleeve Dress ", category: "OOTD", badge: "Brown", image: "pin36.jpg", affiliateLink: "https://link.amazon/B02dPlCI9" },
+      { pinNumber: "#37", title: "🖤 Striped Ribbed Turtleneck & Denim Jeans", category: "OOTD", badge: "Stripes", image: "pin37.jpg", affiliateLink: "https://link.amazon/B08nwTNZT" },
+      { pinNumber: "#38", title: "🍷 Burgundy Zip-Up Hoodie & Black Cargo Pants", category: "OOTD", badge: "COZY", image: "pin38.jpg", affiliateLink: "https://link.amazon/B0f0TtODn" },
+      { pinNumber: "#39", title: "🤍 Cream Ribbed Turtleneck & Wide Leg Denim | Clean Girl Aesthetic ✨", category: "OOTD", badge: "Clean", image: "pin39.jpg", affiliateLink: "https://link.amazon/B047RgoSa" },
+      { pinNumber: "#40", title: "🤎 Brown Striped Knit Sweater & Dark Denim Jeans | Cozy Fall Streetwear ✨", category: "OOTD", badge: "Knit", image: "pin40.jpg", affiliateLink: "https://link.amazon/B0gnWMWkk" },
+      { pinNumber: "#41", title: "🧥 Classic Denim Jacket & Vintage Shades | Effortless City Street Style ✨", category: "OOTD", badge: "Denim", image: "pin41.jpg", affiliateLink: "https://link.amazon/B08R5U7Vn" },
+      { pinNumber: "#42", title: "🤍 White Eyelet Midi Dress | Breezy Summer Elegance ✨", category: "OOTD", badge: "Midi", image: "pin42.jpg", affiliateLink: "https://link.amazon/B07Yz3X6O" },
+      { pinNumber: "#43", title: "❤️ Royal Red Embroidered Anarkali Suit Set | Festive Ethnic Elegance ✨", category: "OOTD", badge: "Trending ✨", image: "pin43.jpg", affiliateLink: "https://link.amazon/B0dMeVtGp" },
+      { pinNumber: "#44", title: "🍷 Maroon Anarkali Kurta & Palazzo Set | Minimalist Ethnic Wear ✨", category: "College & Daily", badge: "Palazzo✨", image: "pin44.jpg", affiliateLink: "https://link.amazon/B0drVdNGm" },
+      { pinNumber: "#45", title: "💙 Navy Blue plain Shirt ", category: "College & Daily", badge: "Classy✨", image: "pin45.jpg", affiliateLink: "https://link.amazon/B01Z0FQaV" },
+      { pinNumber: "#46", title: "🍷 Crimson Off-Shoulder Draped Top ", category: "College & Daily", badge: "Slayy✨", image: "pin46.jpg", affiliateLink: "https://link.amazon/B08X9gr9r" },
+      { pinNumber: "#47", title: "🤎 Camel Fur-Trimmed Puffer Jacket & Light Wash Jeans", category: "OOTD", badge: "Puff", image: "pin47.jpg", affiliateLink: "https://link.amazon/B0gaeW78M" },
+      { pinNumber: "#48", title: "🤍 Cream Puffer Jacket & Wide-Leg Cargo Jeans |", category: "OOTD", badge: "Jacket", image: "pin48.jpg", affiliateLink: "https://link.amazon/" },
+      { pinNumber: "#49", title: "🖤 Black & Beige Block Print Tiered Maxi Dress", category: "OOTD", badge: "Maxi", image: "pin49.jpg", affiliateLink: "https://link.amazon/B0fS2qoqi" },
+      { pinNumber: "#50", title: "💙 White & Blue Bow Print Tiered Midi Dress", category: "OOTD", badge: "MIDI", image: "pin50.jpg", affiliateLink: "https://link.amazon/B08pPfdzm" },
+      { pinNumber: "#51", title: "💚 Sage Green Puff-Sleeve Tiered Maxi Dress |", category: "OOTD", badge: "Maxi", image: "pin51.jpg", affiliateLink: "https://link.amazon/B04hHC9qQ" },
+      { pinNumber: "#52", title: "🖤 Black Sheer-Sleeve Wrap Midi Dress | Classy Evening & Cocktail Elegance ✨", category: "OOTD", badge: "MIDI", image: "pin52.jpg", affiliateLink: "https://link.amazon/B0j9EWX2e" }
     ];
-   const grid = document.getElementById('productGrid');
+
+    const grid = document.getElementById('productGrid');
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselDots = document.getElementById('carouselDots');
     const searchInput = document.getElementById('searchInput');
+    const heroSection = document.getElementById('heroCarousel');
+    const gridTitle = document.getElementById('gridTitle');
     let currentCategory = 'All';
 
-    function renderProducts() {
-      const query = searchInput.value.toLowerCase().trim();
-      grid.innerHTML = '';
+    // Reverse array so newest is always #1 visually
+    const reversedPins = [...dailyPins].reverse(); 
+    const latestItems = reversedPins.slice(0, 6); // Grab newest 6 for Carousel
+    const archiveItems = reversedPins.slice(6); // Rest for Grid
 
-      const filtered = dailyPins.filter(item => {
-        const matchCat = currentCategory === 'All' || item.category === currentCategory;
-        const matchText = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
-        return matchCat && matchText;
-      });
-
-      filtered.forEach((item, idx) => {
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.id = item.pinNumber.replace('#', 'pin-');
-        // Staggered liquid entrance animation
-        card.style.animationDelay = `${(idx % 6) * 70}ms`;
-        card.innerHTML = `
+    // Render a single HTML card string
+    function createCardHTML(item, idx, animationSpeed = 70) {
+      return `
+        <article class="card" id="${item.pinNumber.replace('#', 'pin-')}" style="animation-delay: ${(idx % 6) * animationSpeed}ms;">
           <div class="img-container">
             <span class="pin-badge">${item.pinNumber}</span>
             ${item.badge ? `<span class="trend-badge">${item.badge}</span>` : ''}
@@ -1016,10 +441,90 @@
               <span class="category-tag">${item.category}</span>
               <h2 class="product-title">${item.title}</h2>
             </div>
-            <a href="${item.affiliateLink}" target="_blank" rel="noopener sponsored" class="shop-btn">Shop Look →</a>
+            <a href="${item.affiliateLink}" target="_blank" rel="noopener sponsored" class="shop-btn">View The Edit ✦</a>
           </div>
-        `;
-        grid.appendChild(card);
+        </article>
+      `;
+    }
+
+    // Render Initial Carousel
+    function initCarousel() {
+      carouselTrack.innerHTML = '';
+      carouselDots.innerHTML = '';
+      latestItems.forEach((item, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = createCardHTML(item, idx, 100);
+        carouselTrack.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = `dot-indicator ${idx === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => {
+          carouselTrack.scrollTo({ left: slide.offsetLeft - carouselTrack.offsetLeft, behavior: 'smooth' });
+        });
+        carouselDots.appendChild(dot);
+      });
+      setupAutoScroll();
+    }
+
+    // Auto-Scroll Logic & Dot Syncing
+    function setupAutoScroll() {
+      let isScrolling = true;
+      let dots = document.querySelectorAll('.dot-indicator');
+      
+      // Update dots on manual scroll
+      carouselTrack.addEventListener('scroll', () => {
+        let index = Math.round(carouselTrack.scrollLeft / carouselTrack.clientWidth);
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      });
+
+      // Pause scroll on touch/hover
+      carouselTrack.addEventListener('touchstart', () => isScrolling = false, {passive:true});
+      carouselTrack.addEventListener('mouseenter', () => isScrolling = false);
+      carouselTrack.addEventListener('mouseleave', () => isScrolling = true);
+
+      setInterval(() => {
+        if(!isScrolling) return;
+        let slideWidth = carouselTrack.clientWidth;
+        if (carouselTrack.scrollLeft + slideWidth >= carouselTrack.scrollWidth - 10) {
+          carouselTrack.scrollTo({ left: 0, behavior: 'smooth' }); // Loop back
+        } else {
+          carouselTrack.scrollBy({ left: slideWidth, behavior: 'smooth' });
+        }
+      }, 4000);
+    }
+
+    // Render Main Grid based on Search/Filter
+    function renderGrid() {
+      const query = searchInput.value.toLowerCase().trim();
+      grid.innerHTML = '';
+
+      // If user is searching/filtering, check ALL pins. If not, just show archive.
+      const isFiltering = query !== '' || currentCategory !== 'All';
+      const itemsToRender = isFiltering ? reversedPins : archiveItems;
+
+      // Hide hero carousel if searching/filtering so users focus on results
+      if (isFiltering) {
+        heroSection.classList.add('hidden');
+        gridTitle.textContent = "Search Results";
+      } else {
+        heroSection.classList.remove('hidden');
+        gridTitle.textContent = "The Archive";
+      }
+
+      const filtered = itemsToRender.filter(item => {
+        const matchCat = currentCategory === 'All' || item.category === currentCategory;
+        const matchText = item.title.toLowerCase().includes(query) || item.pinNumber.toLowerCase().includes(query);
+        return matchCat && matchText;
+      });
+
+      if(filtered.length === 0) {
+         grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No curations found for your search.</p>`;
+         return;
+      }
+
+      filtered.forEach((item, idx) => {
+        grid.insertAdjacentHTML('beforeend', createCardHTML(item, idx));
       });
     }
 
@@ -1027,7 +532,7 @@
       currentCategory = category;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderProducts();
+      renderGrid();
     }
 
     function toggleTheme() {
@@ -1037,8 +542,10 @@
       document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️ Golden Dawn Mode' : '🌙 Deep Noir Mode';
     }
 
-    searchInput.addEventListener('input', renderProducts);
-    renderProducts();
+    // Init
+    initCarousel();
+    searchInput.addEventListener('input', renderGrid);
+    renderGrid();
   </script>
 </body>
 </html>
